@@ -6,8 +6,6 @@ import {
   deleteTask,
 } from "../api/taskApi";
 import { AuthContext } from "../context/AuthContext";
-import Assistant from "../components/Assistant";
-
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -16,8 +14,12 @@ const Dashboard = () => {
   const { logout } = useContext(AuthContext);
 
   const fetchTasks = async () => {
-    const res = await getTasks();
-    setTasks(res.data);
+    try {
+      const res = await getTasks();
+      setTasks(res.data);
+    } catch (err) {
+      console.error("Fetch tasks failed");
+    }
   };
 
   useEffect(() => {
@@ -33,14 +35,22 @@ const Dashboard = () => {
     fetchTasks();
   };
 
- return (
-  <div className="min-h-screen relative bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
-    {/* Main Card */}
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white w-[450px] p-6 rounded-xl shadow-xl z-10">
+  const handleComplete = async (id) => {
+    await updateTask(id, { status: "Completed" });
+    fetchTasks();
+  };
+
+  const handleDelete = async (id) => {
+    await deleteTask(id);
+    fetchTasks();
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-purple-900 to-indigo-900">
+      <div className="bg-white/90 backdrop-blur w-[460px] p-6 rounded-2xl shadow-2xl">
         <div className="flex justify-between mb-4">
           <h2 className="text-2xl font-bold">My Tasks</h2>
-          <button onClick={logout} className="text-red-500">
+          <button onClick={logout} className="text-red-500 hover:underline">
             Logout
           </button>
         </div>
@@ -65,7 +75,7 @@ const Dashboard = () => {
 
           <button
             onClick={handleAdd}
-            className="bg-indigo-600 text-white px-4 rounded"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded transition"
           >
             Add
           </button>
@@ -83,16 +93,16 @@ const Dashboard = () => {
               </p>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button
-                onClick={() => updateTask(task._id).then(fetchTasks)}
-                className="text-green-600"
+                onClick={() => handleComplete(task._id)}
+                className="text-green-600 hover:underline"
               >
                 Complete
               </button>
               <button
-                onClick={() => deleteTask(task._id).then(fetchTasks)}
-                className="text-red-600"
+                onClick={() => handleDelete(task._id)}
+                className="text-red-600 hover:underline"
               >
                 Delete
               </button>
@@ -101,11 +111,7 @@ const Dashboard = () => {
         ))}
       </div>
     </div>
-
-    {/* 🤖 Floating Assistant */}
-    <Assistant tasks={tasks} />
-  </div>
-)};
-
+  );
+};
 
 export default Dashboard;

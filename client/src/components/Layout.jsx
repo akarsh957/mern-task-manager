@@ -1,7 +1,10 @@
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      {children}
+    <div className="relative min-h-screen">
+      <div className="stars" />
+      <div className="stars2" />
+      <div className="stars3" />
+      <div className="relative z-10">{children}</div>
     </div>
   );
 };
