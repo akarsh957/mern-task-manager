@@ -1,7 +1,7 @@
 import express from "express";
 import {
-  createTask,
   getTasks,
+  createTask,
   updateTask,
   deleteTask,
 } from "../controllers/taskController.js";
@@ -10,8 +10,8 @@ import protect from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.route("/")
-  .post(protect, createTask)
-  .get(protect, getTasks);
+  .get(protect, getTasks)
+  .post(protect, createTask);
 
 router.route("/:id")
   .put(protect, updateTask)
