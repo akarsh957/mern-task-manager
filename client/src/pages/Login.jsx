@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { loginUser } from "../api/authApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,9 +17,16 @@ const Login = () => {
 
     try {
       const res = await loginUser({ email, password });
-      dispatch({ type: "LOGIN", payload: res.data });
+
+      dispatch({
+        type: "LOGIN",
+        payload: res.data,
+      });
+
+      // ✅ THIS WAS MISSING
+      navigate("/dashboard");
     } catch (err) {
-      setError("Invalid email or password");
+      setError(err.response?.data?.message || "Invalid email or password");
     }
   };
 
