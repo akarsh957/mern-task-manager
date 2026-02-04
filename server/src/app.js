@@ -4,6 +4,9 @@ import authRoutes from "./routes/authRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 
 const app = express();
+const API = axios.create({
+  baseURL: "http://13.126.206.209:5000/api",
+});
 
 app.use(cors());
 app.use(express.json());
