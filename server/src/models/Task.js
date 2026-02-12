@@ -16,6 +16,15 @@ const taskSchema = new mongoose.Schema(
       enum: ["Pending", "Completed"],
       default: "Pending",
     },
+    dueDate: {
+      type: Date,
+      default: null,
+    },
+    parentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task",
+      default: null,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
