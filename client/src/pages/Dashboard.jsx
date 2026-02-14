@@ -58,8 +58,13 @@ const Dashboard = () => {
   };
 
   const handleAddChild = async (title, parentId) => {
-    await createTask({ title, parentId });
-    fetchTasks();
+    try {
+      await createTask({ title, parentId });
+      fetchTasks();
+    } catch (err) {
+      console.error("Failed to add subtask:", err);
+      // Optionally set an error state here to show a notification
+    }
   };
 
   const handleUpdate = async (id, data) => {

@@ -9,6 +9,18 @@ const TaskNode = ({ task, onAdd, onUpdate, onDelete, level = 0 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [title, setTitle] = useState("");
 
+  const handleAddChild = async () => {
+    if (!title.trim()) return;
+    try {
+      await onAdd(title, task._id);
+      setTitle("");
+      setShowInput(false);
+      setIsExpanded(true);
+    } catch (error) {
+      console.error("Failed to add child task", error);
+    }
+  };
+
   const handleToggleComplete = () => {
     const newStatus = task.status === "Completed" ? "Pending" : "Completed";
     onUpdate(task._id, { status: newStatus });
