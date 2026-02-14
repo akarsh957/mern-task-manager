@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { loginUser } from "../api/authApi";
+import { loginUser, googleLogin } from "../api/authApi";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Card from "../components/ui/Card";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
@@ -34,6 +35,19 @@ const Login = () => {
       setError(err.response?.data?.message || "Invalid email or password");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const res = await googleLogin(credentialResponse.credential);
+      dispatch({
+        type: "LOGIN",
+        payload: res.data,
+      });
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Google login failed");
     }
   };
 
@@ -84,12 +98,25 @@ const Login = () => {
           </Button>
         </form>
 
-        <p className="text-sm text-center mt-8 text-gray-400">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-accent-blue hover:text-accent-purple transition-colors font-medium">
-            Create account
-          </Link>
-        </p>
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-glass-200"></span>
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-glass-100 px-2 text-gray-400">Or continue with</span>
+            </div>
+          </div>
+
+          <div className="mt-6 flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setError("Google Login Failed")}
+              theme="filled_black"
+              shape="circle"
+            />
+          </div>
+        </div>
       </Card>
     </div>
   );
