@@ -4,7 +4,7 @@
 TaskFlow is a full-stack task management application built using the **MERN stack** with a unique implementation of a **Tree Data Structure** for handling hierarchical tasks and subtasks.
 
 🔗 **Live Demo:**
-[https://mern-task-manager-ngk1jhm1-akarsh957s-projects.vercel.app](https://github.com/akarsh957/mern-task-manager?tab=readme-ov-file)
+[https://mern-task-manager-ngk1jhm1-akarsh957s-projects.vercel.app](https://mern-task-manager-murex.vercel.app/)
 
 ---
 
