@@ -9,14 +9,14 @@ const Input = forwardRef(({ className, error, ...props }, ref) => {
                 ref={ref}
                 className={twMerge(
                     clsx(
-                        "w-full px-4 py-3 rounded-lg bg-glass-100 border border-glass-200 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-purple/50 focus:border-transparent transition-all backdrop-blur-sm",
-                        error && "border-red-500 focus:ring-red-500",
+                        "w-full px-4 py-3 rounded-xl bg-dark-800/60 border border-glass-200 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent-cyan/30 focus:border-accent-cyan/40 transition-all backdrop-blur-sm",
+                        error && "border-accent-rose focus:ring-accent-rose/30",
                         className
                     )
                 )}
                 {...props}
             />
-            {error && <p className="text-red-400 text-xs mt-1 ml-1">{error}</p>}
+            {error && <p className="text-accent-rose text-xs mt-1 ml-1">{error}</p>}
         </div>
     );
 });

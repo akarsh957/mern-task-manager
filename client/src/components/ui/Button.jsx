@@ -13,10 +13,10 @@ const Button = ({
     const baseStyles = "relative px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants = {
-        primary: "bg-gradient-to-r from-accent-blue to-accent-purple text-white shadow-lg shadow-accent-purple/30 hover:shadow-accent-purple/50",
-        secondary: "bg-glass-100 hover:bg-glass-200 text-white border border-glass-200 backdrop-blur-md",
-        danger: "bg-red-500/80 hover:bg-red-600 text-white shadow-lg shadow-red-500/30",
-        ghost: "bg-transparent hover:bg-glass-100 text-gray-300 hover:text-white",
+        primary: "bg-gradient-to-r from-accent-cyan to-accent-violet text-white shadow-lg shadow-accent-violet/25 hover:shadow-accent-cyan/30 hover:brightness-110",
+        secondary: "bg-glass-100 hover:bg-glass-200 text-white border border-glass-200 backdrop-blur-md hover:border-accent-cyan/30",
+        danger: "bg-accent-rose/80 hover:bg-accent-rose text-white shadow-lg shadow-accent-rose/25",
+        ghost: "bg-transparent hover:bg-glass-100 text-gray-400 hover:text-white",
     };
 
     return (

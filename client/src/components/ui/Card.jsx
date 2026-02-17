@@ -10,7 +10,7 @@ const Card = ({ children, className, hoverEffect = false, ...props }) => {
             whileHover={hoverEffect ? { y: -5 } : {}}
             className={twMerge(
                 clsx(
-                    "bg-glass-100 backdrop-blur-xl border border-glass-200 rounded-2xl shadow-xl overflow-hidden",
+                    "bg-glass-100 backdrop-blur-xl border border-glass-200 rounded-2xl shadow-2xl overflow-hidden glow-border",
                     className
                 )
             )}

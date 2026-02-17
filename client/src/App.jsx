@@ -31,7 +31,7 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-dark-900 text-white font-sans selection:bg-accent-purple selection:text-white overflow-x-hidden">
+      <div className="min-h-screen bg-dark-900 text-white font-sans selection:bg-accent-violet/40 selection:text-white overflow-x-hidden">
         <AnimatedRoutes />
       </div>
     </BrowserRouter>

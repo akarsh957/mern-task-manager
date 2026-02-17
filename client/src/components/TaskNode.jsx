@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, ChevronDown, CheckCircle2, Circle, Plus, Trash2, Edit3 } from "lucide-react";
+import { ChevronRight, ChevronDown, CheckCircle2, Circle, Plus, Trash2 } from "lucide-react";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 
@@ -30,12 +30,12 @@ const TaskNode = ({ task, onAdd, onUpdate, onDelete, level = 0 }) => {
   const isCompleted = task.status === "Completed";
 
   return (
-    <div className="ml-4 mt-2">
+    <div className="ml-4 mt-1">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className={`group relative flex items-center justify-between p-3 rounded-xl border border-transparent hover:border-glass-200 hover:bg-glass-100 transition-all duration-300
-        ${isCompleted ? "opacity-60" : "opacity-100"}`}
+        className={`group relative flex items-center justify-between p-3 rounded-xl border border-transparent hover:border-glass-200 hover:bg-dark-800/30 transition-all duration-300
+        ${isCompleted ? "opacity-50" : "opacity-100"}`}
       >
         {/* Connection Line */}
         {level > 0 && (
@@ -45,32 +45,32 @@ const TaskNode = ({ task, onAdd, onUpdate, onDelete, level = 0 }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`p-1 rounded-full hover:bg-glass-200 transition-colors ${!hasChildren && 'invisible'}`}
+            className={`p-1 rounded-lg hover:bg-glass-200 transition-colors text-gray-500 hover:text-white ${!hasChildren && 'invisible'}`}
           >
-            {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+            {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
           </button>
 
-          <button onClick={handleToggleComplete} className="text-gray-400 hover:text-accent-blue transition-colors">
+          <button onClick={handleToggleComplete} className="transition-colors">
             {isCompleted ? (
-              <CheckCircle2 className="text-green-400" size={20} />
+              <CheckCircle2 className="text-emerald-400" size={18} />
             ) : (
-              <Circle className="text-gray-400 group-hover:text-accent-purple transition-colors" size={20} />
+              <Circle className="text-gray-600 group-hover:text-accent-cyan transition-colors" size={18} />
             )}
           </button>
 
           <div>
-            <p className={`font-medium ${isCompleted ? "line-through text-gray-400" : "text-white"}`}>
+            <p className={`font-medium text-sm ${isCompleted ? "line-through text-gray-500" : "text-gray-200"}`}>
               {task.title}
             </p>
             {task.dueDate && (
-              <span className="text-[10px] text-gray-400 block mt-0.5">
+              <span className="text-[10px] text-gray-500 block mt-0.5">
                 Due: {new Date(task.dueDate).toLocaleDateString()}
               </span>
             )}
             <div className="flex items-center gap-2 mt-1">
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border ${task.priority === 'High' ? 'border-red-500/30 text-red-300 bg-red-500/10' :
-                task.priority === 'Medium' ? 'border-yellow-500/30 text-yellow-300 bg-yellow-500/10' :
-                  'border-green-500/30 text-green-300 bg-green-500/10'
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${task.priority === 'High' ? 'bg-accent-rose/15 text-accent-rose border border-accent-rose/20' :
+                task.priority === 'Medium' ? 'bg-accent-amber/15 text-accent-amber border border-accent-amber/20' :
+                  'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
                 }`}>
                 {task.priority || 'Medium'}
               </span>
@@ -78,21 +78,21 @@ const TaskNode = ({ task, onAdd, onUpdate, onDelete, level = 0 }) => {
           </div>
         </div>
 
-        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             onClick={() => setShowInput(!showInput)}
-            className="p-2 text-gray-400 hover:text-accent-blue hover:bg-glass-200 rounded-lg transition-all"
+            className="p-2 text-gray-500 hover:text-accent-cyan hover:bg-glass-100 rounded-lg transition-all"
             title="Add Subtask"
           >
-            <Plus size={16} />
+            <Plus size={14} />
           </button>
 
           <button
             onClick={() => onDelete(task._id)}
-            className="p-2 text-gray-400 hover:text-red-400 hover:bg-glass-200 rounded-lg transition-all"
+            className="p-2 text-gray-500 hover:text-accent-rose hover:bg-accent-rose/10 rounded-lg transition-all"
             title="Delete Task"
           >
-            <Trash2 size={16} />
+            <Trash2 size={14} />
           </button>
         </div>
       </motion.div>
@@ -105,7 +105,7 @@ const TaskNode = ({ task, onAdd, onUpdate, onDelete, level = 0 }) => {
             className="flex gap-2 py-2"
           >
             <Input
-              className="py-1 text-sm bg-glass-200/50"
+              className="py-2 text-sm bg-dark-800/40"
               placeholder="Subtask title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -114,7 +114,7 @@ const TaskNode = ({ task, onAdd, onUpdate, onDelete, level = 0 }) => {
             />
             <Button
               onClick={handleAddChild}
-              className="px-3 py-1 text-sm h-full"
+              className="px-3 py-2 text-sm h-full"
               variant="secondary"
             >
               Add

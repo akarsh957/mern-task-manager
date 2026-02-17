@@ -53,25 +53,33 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background blobs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-accent-purple/30 rounded-full blur-[100px] animate-pulse-slow"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent-blue/30 rounded-full blur-[100px] animate-pulse-slow delay-1000"></div>
+      {/* Animated background mesh */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-[-20%] left-[-15%] w-[600px] h-[600px] bg-accent-cyan/15 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div className="absolute top-[30%] right-[-10%] w-[500px] h-[500px] bg-accent-violet/20 rounded-full blur-[120px] animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-[-15%] left-[20%] w-[400px] h-[400px] bg-accent-rose/10 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+      </div>
 
-      <Card className="w-[400px] p-8 relative z-10">
-        <h2 className="text-3xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Welcome Back</h2>
-        <p className="text-center text-gray-400 mb-8">Enter your credentials to access your workspace</p>
+      <Card className="w-[420px] p-8 relative z-10">
+        {/* Shimmer top accent */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent opacity-60"></div>
+
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gradient mb-2">Welcome Back</h2>
+          <p className="text-gray-500 text-sm">Enter your credentials to access your workspace</p>
+        </div>
 
         {error && (
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-red-500/10 border border-red-500/50 text-red-200 text-sm text-center p-3 rounded-lg mb-6"
+            className="bg-accent-rose/10 border border-accent-rose/30 text-accent-rose text-sm text-center p-3 rounded-xl mb-6"
           >
             {error}
           </motion.p>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <Input
             type="email"
             placeholder="Email Address"
@@ -98,13 +106,13 @@ const Login = () => {
           </Button>
         </form>
 
-        <div className="mt-6">
+        <div className="mt-8">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-glass-200"></span>
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-glass-100 px-2 text-gray-400">Or continue with</span>
+              <span className="bg-dark-800/80 px-3 text-gray-500 tracking-wider">Or continue with</span>
             </div>
           </div>
 
